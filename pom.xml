@@ -9,6 +9,14 @@
 
 	<name>AnnotationScanner</name>
 	<description>Сканер аннотаций по пакетам</description>
+	<dependencies>
+		<dependency>
+			<groupId>org.jetbrains</groupId>
+			<artifactId>annotations</artifactId>
+			<version>RELEASE</version>
+			<scope>compile</scope>
+		</dependency>
+	</dependencies>
 	<version>1.0.0</version>
 	<url>https://github.com/kalenchukov/AnnotationScanner</url>
 

@@ -3,20 +3,21 @@
 
 ### Использование
 ```java
-AnnotationScanner annotationScanner = new AnnotationScanner();
-annotationScanner.addPackage("dev.kalenchukov.annotationscanner.annotatedclasses1");
-annotationScanner.addPackage("dev.kalenchukov.annotationscanner.annotatedclasses2");
-Set<Class<?>> annotatedClasses = annotationScanner.findAnnotation(MyAnnotation.class);
+AnnotationScanning annotationScanner = new AnnotationScanner();
+annotationScanner.addPackage("dev.kalenchukov.test.packages.films");
+annotationScanner.addPackage("dev.kalenchukov.test.packages.musics");
+List<Class<?>> annotatedClasses = annotationScanner.findAnnotatedClasses(MyAnnotation.class);
 
-for (Class<?> object : annotatedClasses)
+for (Class<?> objectClass : annotatedClasses)
 {
-    System.out.println(object.getName());
+    System.out.println(objectClass.getName() + ".class");
 }
 
 /*
 Результат выполнения:
-dev.kalenchukov.annotationscanner.annotatedclasses1.ClassAnnotated2
-dev.kalenchukov.annotationscanner.annotatedclasses1.ClassAnnotated1
-dev.kalenchukov.annotationscanner.annotatedclasses2.ClassAnnotated3
+dev.kalenchukov.test.packages.films.Film.class
+dev.kalenchukov.test.packages.films.Video.class
+dev.kalenchukov.test.packages.musics.rock.RockMusic.class
+dev.kalenchukov.test.packages.musics.Music.class
 */
 ```

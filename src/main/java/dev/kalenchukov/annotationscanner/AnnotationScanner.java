@@ -6,6 +6,8 @@
 
 package dev.kalenchukov.annotationscanner;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.io.*;
 import java.lang.annotation.Annotation;
 import java.net.URI;
@@ -13,77 +15,120 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.*;
 
-public class AnnotationScanner implements ScanningAnnotations
+public class AnnotationScanner implements AnnotationScanning
 {
-	private Set<String> pkgs = new HashSet<>();
+	@NotNull
+	private final Set<String> pkgs = new HashSet<>();
 
-	public void addPackage(String pkg)
+	@NotNull
+	private final List<Class<?>> annotatedClasses = new ArrayList<>();
+
+	@NotNull
+	private final String pathRoot = this.getPathRoot();
+
+	public void addPackage(@NotNull String pkg)
 	{
-		Objects.requireNonNull(pkg);
-
 		this.pkgs.add(pkg);
 	}
 
-	public Set<Class<?>> findAnnotation(Class<? extends Annotation> annotationClass)
+	public void removePackages()
 	{
-		Objects.requireNonNull(annotationClass);
+		this.pkgs.clear();
+	}
 
-		Set<Class<?>> annotatedClasses = new HashSet<>();
+	@NotNull
+	public List<Class<?>> findAnnotatedClasses(@NotNull Class<? extends Annotation> annotationClass)
+	{
+		annotatedClasses.clear();
 
-		for (String pkg : pkgs)
+		for (String pkg : this.pkgs)
 		{
-			annotatedClasses.addAll(loadPackage(pkg, annotationClass));
+			this.getFolders(pkg, annotationClass);
 		}
 
 		return annotatedClasses;
 	}
 
-	private Set<Class<?>> loadPackage(String pkg, Class<? extends Annotation> annotationClass)
+	private void getFolders(@NotNull String path, @NotNull Class<? extends Annotation> annotationClass)
 	{
-		Set<Class<?>> annotatedClasses = new HashSet<>();
-
 		try
 		{
 			ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-			URL url = classLoader.getResource(pkg.replace(".", "/"));
 
-			if (url == null)
+			URL url = classLoader.getResource(path.replace(pathRoot, "")
+												  .replace(".", "/"));
+
+			if (url != null)
 			{
-				throw new NullPointerException("Bad package: " + pkg);
-			}
+				URI uri = url.toURI();
+				File dir = new File(uri.getPath());
 
-			URI uri = url.toURI();
-			File dir = new File(uri.getPath());
+				File[] files = dir.listFiles();
 
-			FileFilter fileFilter = new FileFilter()
-			{
-				@Override
-				public boolean accept(File pathname)
+				if (files != null)
 				{
-					return (pathname.isFile());
-				}
-			};
-
-			File[] files = dir.listFiles(fileFilter);
-
-			if (files != null)
-			{
-				for (File file : files)
-				{
-					Class<?> object = Class.forName(pkg + "." + file.getName().replace(".class", ""));
-
-					if (object.isAnnotationPresent(annotationClass))
+					for (File file : files)
 					{
-						annotatedClasses.add(object);
+						if (file.isDirectory())
+						{
+							this.getFolders(file.getPath(), annotationClass);
+						}
+						else
+						{
+							this.getFiles(file.getPath(), annotationClass);
+						}
 					}
 				}
 			}
 		}
-		catch(ClassNotFoundException | NullPointerException | URISyntaxException | SecurityException exception)
+		catch (NullPointerException | URISyntaxException | SecurityException exception)
+		{
+			exception.printStackTrace();
+		}
+	}
+
+	private void getFiles(@NotNull String path, @NotNull Class<? extends Annotation> annotationClass)
+	{
+		try
+		{
+			Class<?> object = Class.forName(path.replace(pathRoot, "")
+												.replace("/", ".")
+												.replace(".class", ""));
+
+			if (object.isAnnotationPresent(annotationClass))
+			{
+				annotatedClasses.add(object);
+			}
+		}
+		catch (ClassNotFoundException exception)
+		{
+			exception.printStackTrace();
+		}
+	}
+
+	@NotNull
+	private String getPathRoot()
+	{
+		String path = "";
+
+		try
+		{
+			ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+
+			URL url = classLoader.getResource("");
+
+			if (url == null)
+			{
+				throw new NullPointerException();
+			}
+
+			path = url.toURI().getPath();
+		}
+		catch (NullPointerException | URISyntaxException exception)
 		{
 			exception.printStackTrace();
 		}
 
-		return annotatedClasses;
+		return path;
 	}
 }
