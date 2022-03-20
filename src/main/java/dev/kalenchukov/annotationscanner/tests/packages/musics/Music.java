@@ -4,12 +4,12 @@
  * E-mail: mailto:aleksey.kalenchukov@yandex.ru
  */
 
-package dev.kalenchukov.annotationscanner.test.packages.films;
+package dev.kalenchukov.annotationscanner.tests.packages.musics;
 
-import dev.kalenchukov.annotationscanner.test.annotations.MyAnnotation;
+import dev.kalenchukov.annotationscanner.tests.annotations.MyAnnotation;
 
 @MyAnnotation
-public class Film
+public class Music
 {
 
 }

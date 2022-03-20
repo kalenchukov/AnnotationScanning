@@ -4,21 +4,21 @@
  * E-mail: mailto:aleksey.kalenchukov@yandex.ru
  */
 
-package dev.kalenchukov.annotationscanner.test;
+package dev.kalenchukov.annotationscanner.tests;
 
 import dev.kalenchukov.annotationscanner.AnnotationScanner;
 import dev.kalenchukov.annotationscanner.AnnotationScanning;
-import dev.kalenchukov.annotationscanner.test.annotations.MyAnnotation;
+import dev.kalenchukov.annotationscanner.tests.annotations.MyAnnotation;
 
 import java.util.List;
 
-public class Run
+public class Test
 {
 	public static void main(String[] args)
 	{
 		AnnotationScanning annotationScanner = new AnnotationScanner();
-		annotationScanner.addPackage("dev.kalenchukov.annotationscanner.test.packages.films");
-		annotationScanner.addPackage("dev.kalenchukov.annotationscanner.test.packages.musics");
+		annotationScanner.addPackage("dev.kalenchukov.annotationscanner.tests.packages.films");
+		annotationScanner.addPackage("dev.kalenchukov.annotationscanner.tests.packages.musics");
 		List<Class<?>> annotatedClasses = annotationScanner.findAnnotatedClasses(MyAnnotation.class);
 
 		for (Class<?> objectClass : annotatedClasses)
