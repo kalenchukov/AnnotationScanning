@@ -12,10 +12,10 @@
 
 	<groupId>dev.kalenchukov</groupId>
 	<artifactId>annotation-scanner</artifactId>
+	<version>1.1.0</version>
 
 	<name>AnnotationScanner</name>
 	<description>Сканер аннотаций по пакетам</description>
-	<version>1.1.0</version>
 	<url>https://github.com/kalenchukov/AnnotationScanner</url>
 
 	<licenses>
