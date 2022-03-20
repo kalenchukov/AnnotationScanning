@@ -26,7 +26,7 @@ public class AnnotationScanner implements AnnotationScanning
 	@NotNull
 	private final String pathRoot = this.getPathRoot();
 
-	public void addPackage(@NotNull String pkg)
+	public void addPackage(@NotNull final String pkg)
 	{
 		this.pkgs.add(pkg);
 	}
@@ -37,19 +37,18 @@ public class AnnotationScanner implements AnnotationScanning
 	}
 
 	@NotNull
-	public List<Class<?>> findAnnotatedClasses(@NotNull Class<? extends Annotation> annotationClass)
+	public List<Class<?>> findAnnotatedClasses(@NotNull final Class<? extends Annotation> annotationClass)
 	{
 		annotatedClasses.clear();
 
-		for (String pkg : this.pkgs)
-		{
+		for (String pkg : this.pkgs) {
 			this.getFolders(pkg, annotationClass);
 		}
 
 		return annotatedClasses;
 	}
 
-	private void getFolders(@NotNull String path, @NotNull Class<? extends Annotation> annotationClass)
+	private void getFolders(@NotNull final String path, @NotNull final Class<? extends Annotation> annotationClass)
 	{
 		try
 		{
@@ -87,7 +86,7 @@ public class AnnotationScanner implements AnnotationScanning
 		}
 	}
 
-	private void getFiles(@NotNull String path, @NotNull Class<? extends Annotation> annotationClass)
+	private void getFiles(@NotNull final String path, @NotNull final Class<? extends Annotation> annotationClass)
 	{
 		try
 		{
