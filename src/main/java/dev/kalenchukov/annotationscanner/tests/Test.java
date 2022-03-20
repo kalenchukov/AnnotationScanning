@@ -12,18 +12,17 @@ import dev.kalenchukov.annotationscanner.tests.annotations.MyAnnotation;
 
 import java.util.List;
 
-public class Test
+public final class Test
 {
 	public static void main(String[] args)
 	{
 		AnnotationScanning annotationScanner = new AnnotationScanner();
 		annotationScanner.addPackage("dev.kalenchukov.annotationscanner.tests.packages.films");
-		annotationScanner.addPackage("dev.kalenchukov.annotationscanner.tests.packages.musics");
+//		annotationScanner.addPackage("dev.kalenchukov.annotationscanner.tests.packages.musics");
 		List<Class<?>> annotatedClasses = annotationScanner.findAnnotatedClasses(MyAnnotation.class);
 
-		for (Class<?> objectClass : annotatedClasses)
-		{
-			System.out.println(objectClass.getName() + ".class");
+		for (Class<?> objectClass : annotatedClasses) {
+			System.out.println("Найден класс: " + objectClass.getName() + ".class");
 		}
 	}
 }

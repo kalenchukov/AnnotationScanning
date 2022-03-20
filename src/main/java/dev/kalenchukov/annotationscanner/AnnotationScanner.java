@@ -10,9 +10,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.*;
 import java.lang.annotation.Annotation;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
 import java.util.*;
 
 public class AnnotationScanner implements AnnotationScanning
@@ -41,6 +38,11 @@ public class AnnotationScanner implements AnnotationScanning
 	{
 		annotatedClasses.clear();
 
+		// Добавление корневого пакета, если нет ни одного
+		if (pkgs.size() == 0) {
+			this.addPackage(this.pathRoot);
+		}
+
 		for (String pkg : this.pkgs) {
 			this.getFolders(pkg, annotationClass);
 		}
@@ -48,39 +50,37 @@ public class AnnotationScanner implements AnnotationScanning
 		return annotatedClasses;
 	}
 
-	private void getFolders(@NotNull final String path, @NotNull final Class<? extends Annotation> annotationClass)
+	private void getFolders(@NotNull String path, @NotNull final Class<? extends Annotation> annotationClass)
 	{
+		System.out.println("FOLDER: " + path);
+
+		if (path.startsWith(this.pathRoot)) {
+			path = path.replace(this.pathRoot, "");
+		}
+
 		try
 		{
-			ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+			File dir = new File(this.packageToPath(path));
 
-			URL url = classLoader.getResource(path.replace(pathRoot, "")
-												  .replace(".", "/"));
+			File[] files = dir.listFiles();
 
-			if (url != null)
+			if (files != null)
 			{
-				URI uri = url.toURI();
-				File dir = new File(uri.getPath());
-
-				File[] files = dir.listFiles();
-
-				if (files != null)
+				for (File file : files)
 				{
-					for (File file : files)
+					if (!file.getName().equals("module-info.class") && !file.getName().equals("package-info.class"))
 					{
-						if (file.isDirectory())
-						{
+						if (file.isDirectory()) {
 							this.getFolders(file.getPath(), annotationClass);
 						}
-						else
-						{
+						else {
 							this.getFiles(file.getPath(), annotationClass);
 						}
 					}
 				}
 			}
 		}
-		catch (NullPointerException | URISyntaxException | SecurityException exception)
+		catch (Exception exception)
 		{
 			exception.printStackTrace();
 		}
@@ -88,18 +88,17 @@ public class AnnotationScanner implements AnnotationScanning
 
 	private void getFiles(@NotNull final String path, @NotNull final Class<? extends Annotation> annotationClass)
 	{
+		System.out.println("FILE: " + path);
+
 		try
 		{
-			Class<?> object = Class.forName(path.replace(pathRoot, "")
-												.replace("/", ".")
-												.replace(".class", ""));
+			Class<?> objectClass = Class.forName(this.pathToPackage(path).replace(".class", ""));
 
-			if (object.isAnnotationPresent(annotationClass))
-			{
-				annotatedClasses.add(object);
+			if (objectClass.isAnnotationPresent(annotationClass)) {
+				annotatedClasses.add(objectClass);
 			}
 		}
-		catch (ClassNotFoundException exception)
+		catch (Exception exception)
 		{
 			exception.printStackTrace();
 		}
@@ -108,26 +107,23 @@ public class AnnotationScanner implements AnnotationScanning
 	@NotNull
 	private String getPathRoot()
 	{
-		String path = "";
+		String pathRoot = System.getProperty("user.dir") + "/target/classes/";
 
-		try
-		{
-			ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+		System.out.println("ROOT: " + pathRoot);
 
-			URL url = classLoader.getResource("");
+		return pathRoot;
+	}
 
-			if (url == null)
-			{
-				throw new NullPointerException();
-			}
+	@NotNull
+	private String packageToPath(@NotNull final String packageName)
+	{
+		return this.pathRoot + packageName.replace(".", "/");
+	}
 
-			path = url.toURI().getPath();
-		}
-		catch (NullPointerException | URISyntaxException exception)
-		{
-			exception.printStackTrace();
-		}
-
-		return path;
+	@NotNull
+	private String pathToPackage(@NotNull final String path)
+	{
+		return path.replace(pathRoot, "")
+				   .replace("/", ".");
 	}
 }
