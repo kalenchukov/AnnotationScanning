@@ -15,9 +15,9 @@ for (Class<?> objectClass : annotatedClasses)
 
 /*
 Результат выполнения:
-dev.kalenchukov.annotationscanner.testss.packages.films.Film.class
-dev.kalenchukov.annotationscanner.testss.packages.films.Video.class
-dev.kalenchukov.annotationscanner.testss.packages.musics.rock.RockMusic.class
-dev.kalenchukov.annotationscanner.testss.packages.musics.Music.class
+dev.kalenchukov.annotationscanner.tests.packages.films.Film.class
+dev.kalenchukov.annotationscanner.tests.packages.films.Video.class
+dev.kalenchukov.annotationscanner.tests.packages.musics.rock.RockMusic.class
+dev.kalenchukov.annotationscanner.tests.packages.musics.Music.class
 */
 ```
