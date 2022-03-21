@@ -11,14 +11,16 @@ import dev.kalenchukov.annotationscanner.AnnotationScanning;
 import dev.kalenchukov.annotationscanner.tests.annotations.MyAnnotation;
 
 import java.util.List;
+import java.util.Locale;
 
 public final class Test
 {
 	public static void main(String[] args)
 	{
 		AnnotationScanning annotationScanner = new AnnotationScanner();
+		annotationScanner.setLocale(new Locale("ru", "RU"));
 		annotationScanner.addPackage("dev.kalenchukov.annotationscanner.tests.packages.films");
-//		annotationScanner.addPackage("dev.kalenchukov.annotationscanner.tests.packages.musics");
+		annotationScanner.addPackage("dev.kalenchukov.annotationscanner.tests.packages.musics");
 		List<Class<?>> annotatedClasses = annotationScanner.findAnnotatedClasses(MyAnnotation.class);
 
 		for (Class<?> objectClass : annotatedClasses) {
