@@ -14,7 +14,7 @@ import java.util.*;
 import org.apache.log4j.Logger;
 
 /**
- * Класс для поиска аннотированные классов.
+ * Класс для поиска аннотированных классов.
  */
 public class AnnotationScanner implements AnnotationScanning
 {
@@ -26,8 +26,8 @@ public class AnnotationScanner implements AnnotationScanning
 
 	/**
 	 * Локаль.
-	 * Внимание! Необходима для логов, так как локализационные тексты используются только для логирования.
 	 * Для изменения локали необходимо использовать {@link #setLocale(Locale)}.
+	 * Внимание! Необходима для логов, так как локализационные тексты используются только для логирования.
 	 */
 	@NotNull
 	private Locale locale = new Locale("ru", "RU");
@@ -42,7 +42,7 @@ public class AnnotationScanner implements AnnotationScanning
 	 * Корневая директория для поиска аннотированных классов.
 	 */
 	@NotNull
-	private final String pathRoot = this.getPathRoot();
+	private final String directoryRoot = this.getRootDirectory();
 
 	/**
 	 * Коллекция пакетов в которых необходимо искать аннотированные классы.
@@ -98,18 +98,18 @@ public class AnnotationScanner implements AnnotationScanning
 	{
 		LOG.debug(String.format(
 			localeCore.getString("00008"),
-			this.pathRoot
+			this.directoryRoot
 		));
 
 		annotatedClasses.clear();
 
 		// Добавление корневого пакета, если нет ни одного
 		if (pkgs.size() == 0) {
-			this.addPackage(this.pathRoot);
+			this.addPackage(this.directoryRoot);
 		}
 
 		for (String pkg : this.pkgs) {
-			this.scanFolder(this.packageToPath(pkg), annotationClass);
+			this.scanDirectory(this.packageToDirectory(pkg), annotationClass);
 		}
 
 		return annotatedClasses;
@@ -118,25 +118,25 @@ public class AnnotationScanner implements AnnotationScanning
 	/**
 	 * Сканирует директорию на наличие файлов.
 	 *
-	 * @param path Строка в виде директории.
+	 * @param directory Директория.
 	 * @param annotationClass Аннотация которую необходимо искать в классах.
 	 */
-	private void scanFolder(@NotNull String path, @NotNull final Class<? extends Annotation> annotationClass)
+	private void scanDirectory(@NotNull String directory, @NotNull final Class<? extends Annotation> annotationClass)
 	{
-		if (path.startsWith(this.pathRoot)) {
-			path = path.replace(this.pathRoot, "");
+		if (directory.startsWith(this.directoryRoot)) {
+			directory = directory.replace(this.directoryRoot, "");
 		}
 
-		path = this.packageToPath(path);
+		directory = this.packageToDirectory(directory);
 
 		LOG.debug(String.format(
 			localeCore.getString("00003"),
-			path
+			directory
 		));
 
 		try
 		{
-			File dir = new File(path);
+			File dir = new File(directory);
 			File[] files = Objects.requireNonNull(dir.listFiles());
 
 			for (File file : files)
@@ -148,13 +148,13 @@ public class AnnotationScanner implements AnnotationScanning
 				if (!file.canRead()) {
 					LOG.debug(String.format(
 						localeCore.getString("00004"),
-						path
+						directory
 					));
 					continue;
 				}
 
 				if (file.isDirectory()) {
-					this.scanFolder(file.getPath(), annotationClass);
+					this.scanDirectory(file.getPath(), annotationClass);
 				}
 				else {
 					this.checkFile(file.getPath(), annotationClass);
@@ -170,7 +170,7 @@ public class AnnotationScanner implements AnnotationScanning
 	/**
 	 * Проверяет файл на наличие необходимой аннотации.
 	 *
-	 * @param path Директория до файла.
+	 * @param path Путь до файла.
 	 * @param annotationClass Аннотация которую необходимо искать в классах.
 	 */
 	private void checkFile(@NotNull final String path, @NotNull final Class<? extends Annotation> annotationClass)
@@ -186,7 +186,7 @@ public class AnnotationScanner implements AnnotationScanning
 
 		try
 		{
-			Class<?> objectClass = Class.forName(this.pathToPackage(path).replace(".class", ""));
+			Class<?> objectClass = Class.forName(this.directoryToPackage(path).replace(".class", ""));
 
 			if (objectClass.isAnnotationPresent(annotationClass))
 			{
@@ -207,10 +207,10 @@ public class AnnotationScanner implements AnnotationScanning
 	/**
 	 * Возвращает корневую директорию.
 	 *
-	 * @return Строка в виде директории.
+	 * @return Корневая директория.
 	 */
 	@NotNull
-	private String getPathRoot()
+	private String getRootDirectory()
 	{
 		return System.getProperty("user.dir") + "/target/classes/";
 	}
@@ -218,42 +218,42 @@ public class AnnotationScanner implements AnnotationScanning
 	/**
 	 * Преобразовывает пакет в директорию.
 	 *
-	 * @param pkg Строка в виде пакета.
-	 * @return Строка в виде директории.
+	 * @param pkg Пакет.
+	 * @return Директория.
 	 */
 	@NotNull
-	private String packageToPath(@NotNull final String pkg)
+	private String packageToDirectory(@NotNull final String pkg)
 	{
-		return this.pathRoot + pkg.replace(".", "/");
+		return this.directoryRoot + pkg.replace(".", "/");
 	}
 
 	/**
 	 * Преобразовывает директорию в пакет.
 	 *
-	 * @param path Строка в виде директории.
-	 * @return Строка в виде пакета.
+	 * @param directory Директория.
+	 * @return Пакет.
 	 */
 	@NotNull
-	private String pathToPackage(@NotNull final String path)
+	private String directoryToPackage(@NotNull final String directory)
 	{
-		return path.replace(pathRoot, "")
-				   .replace("/", ".");
+		return directory.replace(directoryRoot, "")
+						.replace("/", ".");
 	}
 
 	/**
 	 * Проверяет корректность файла.
 	 *
-	 * @param path Директория до файла.
+	 * @param directory Директория до файла.
 	 * @return Возвращает true, если в файле может присутствовать нужная аннотация, иначе false.
 	 */
 	@NotNull
-	private Boolean isCorrectFile(@NotNull final String path)
+	private Boolean isCorrectFile(@NotNull final String directory)
 	{
-		if (!path.endsWith(".class"))
+		if (!directory.endsWith(".class"))
 		{
 			LOG.debug(String.format(
 				localeCore.getString("00006"),
-				path
+				directory
 			));
 
 			return false;
@@ -266,11 +266,11 @@ public class AnnotationScanner implements AnnotationScanning
 
 		for (String file : excludeFiles)
 		{
-			if (path.endsWith(file))
+			if (directory.endsWith(file))
 			{
 				LOG.debug(String.format(
 					localeCore.getString("00006"),
-					path
+					directory
 				));
 
 				return false;

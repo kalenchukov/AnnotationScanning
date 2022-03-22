@@ -24,7 +24,7 @@ public interface AnnotationScanning
 	/**
 	 * Добавляет пакет в котором необходимо искать аннотированные классы.
 	 *
-	 * @param pkg Строка в виде пакета.
+	 * @param pkg Пакет.
 	 */
 	void addPackage(@NotNull String pkg);
 
