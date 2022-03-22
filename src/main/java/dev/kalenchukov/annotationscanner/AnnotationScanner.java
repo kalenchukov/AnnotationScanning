@@ -42,7 +42,7 @@ public class AnnotationScanner implements AnnotationScanning
 	 * Корневая директория для поиска аннотированных классов.
 	 */
 	@NotNull
-	private final String directoryRoot = this.getRootDirectory();
+	private final String rootDirectory = this.getRootDirectory();
 
 	/**
 	 * Коллекция пакетов в которых необходимо искать аннотированные классы.
@@ -98,14 +98,14 @@ public class AnnotationScanner implements AnnotationScanning
 	{
 		LOG.debug(String.format(
 			localeCore.getString("00008"),
-			this.directoryRoot
+			this.rootDirectory
 		));
 
 		annotatedClasses.clear();
 
 		// Добавление корневого пакета, если нет ни одного
 		if (pkgs.size() == 0) {
-			this.addPackage(this.directoryRoot);
+			this.addPackage(this.rootDirectory);
 		}
 
 		for (String pkg : this.pkgs) {
@@ -123,8 +123,8 @@ public class AnnotationScanner implements AnnotationScanning
 	 */
 	private void scanDirectory(@NotNull String directory, @NotNull final Class<? extends Annotation> annotationClass)
 	{
-		if (directory.startsWith(this.directoryRoot)) {
-			directory = directory.replace(this.directoryRoot, "");
+		if (directory.startsWith(this.rootDirectory)) {
+			directory = directory.replace(this.rootDirectory, "");
 		}
 
 		directory = this.packageToDirectory(directory);
@@ -224,7 +224,7 @@ public class AnnotationScanner implements AnnotationScanning
 	@NotNull
 	private String packageToDirectory(@NotNull final String pkg)
 	{
-		return this.directoryRoot + pkg.replace(".", "/");
+		return this.rootDirectory + pkg.replace(".", "/");
 	}
 
 	/**
@@ -236,7 +236,7 @@ public class AnnotationScanner implements AnnotationScanning
 	@NotNull
 	private String directoryToPackage(@NotNull final String directory)
 	{
-		return directory.replace(directoryRoot, "")
+		return directory.replace(rootDirectory, "")
 						.replace("/", ".");
 	}
 
