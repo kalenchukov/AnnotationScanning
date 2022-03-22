@@ -62,9 +62,11 @@ public class AnnotationScanner implements AnnotationScanning
 	 */
 	public void setLocale(@NotNull final Locale locale)
 	{
+		Objects.requireNonNull(locale);
+
 		this.locale = locale;
 
-		localeCore = ResourceBundle.getBundle("localizations/core", this.locale);
+		this.localeCore = ResourceBundle.getBundle("localizations/core", this.locale);
 	}
 
 	/**
@@ -72,10 +74,12 @@ public class AnnotationScanner implements AnnotationScanning
 	 */
 	public void addPackage(@NotNull final String pkg)
 	{
+		Objects.requireNonNull(pkg);
+
 		this.pkgs.add(pkg);
 
 		LOG.debug(String.format(
-			localeCore.getString("00001"),
+			this.localeCore.getString("00001"),
 			pkg
 		));
 	}
@@ -87,7 +91,7 @@ public class AnnotationScanner implements AnnotationScanning
 	{
 		this.pkgs.clear();
 
-		LOG.debug(localeCore.getString("00002"));
+		LOG.debug(this.localeCore.getString("00002"));
 	}
 
 	/**
@@ -96,20 +100,22 @@ public class AnnotationScanner implements AnnotationScanning
 	@NotNull
 	public List<Class<?>> findAnnotatedClasses(@NotNull final Class<? extends Annotation> annotationClass)
 	{
+		Objects.requireNonNull(annotationClass);
+
 		LOG.debug(String.format(
-			localeCore.getString("00008"),
+			this.localeCore.getString("00008"),
 			this.rootDirectory
 		));
 
 		annotatedClasses.clear();
 
-		// Добавление корневого пакета, если нет ни одного
-		if (pkgs.size() == 0) {
-			this.addPackage(this.rootDirectory);
-		}
-
 		for (String pkg : this.pkgs) {
 			this.scanDirectory(this.packageToDirectory(pkg), annotationClass);
+		}
+
+		// Сканирование корневой директории, если не добавлено ни одного пакета для сканирования
+		if (pkgs.size() == 0) {
+			this.scanDirectory(this.rootDirectory, annotationClass);
 		}
 
 		return annotatedClasses;
@@ -123,14 +129,11 @@ public class AnnotationScanner implements AnnotationScanning
 	 */
 	private void scanDirectory(@NotNull String directory, @NotNull final Class<? extends Annotation> annotationClass)
 	{
-		if (directory.startsWith(this.rootDirectory)) {
-			directory = directory.replace(this.rootDirectory, "");
-		}
-
-		directory = this.packageToDirectory(directory);
+		Objects.requireNonNull(directory);
+		Objects.requireNonNull(annotationClass);
 
 		LOG.debug(String.format(
-			localeCore.getString("00003"),
+			this.localeCore.getString("00003"),
 			directory
 		));
 
@@ -147,7 +150,7 @@ public class AnnotationScanner implements AnnotationScanning
 
 				if (!file.canRead()) {
 					LOG.debug(String.format(
-						localeCore.getString("00004"),
+						this.localeCore.getString("00004"),
 						directory
 					));
 					continue;
@@ -175,8 +178,11 @@ public class AnnotationScanner implements AnnotationScanning
 	 */
 	private void checkFile(@NotNull final String path, @NotNull final Class<? extends Annotation> annotationClass)
 	{
+		Objects.requireNonNull(path);
+		Objects.requireNonNull(annotationClass);
+
 		LOG.debug(String.format(
-			localeCore.getString("00005"),
+			this.localeCore.getString("00005"),
 			path
 		));
 
@@ -186,14 +192,14 @@ public class AnnotationScanner implements AnnotationScanning
 
 		try
 		{
-			Class<?> objectClass = Class.forName(this.directoryToPackage(path).replace(".class", ""));
+			Class<?> objectClass = Class.forName(this.directoryToPackage(path).replaceAll("\\.class$", ""));
 
 			if (objectClass.isAnnotationPresent(annotationClass))
 			{
 				annotatedClasses.add(objectClass);
 
 				LOG.debug(String.format(
-					localeCore.getString("00007"),
+					this.localeCore.getString("00007"),
 					path
 				));
 			}
@@ -224,6 +230,8 @@ public class AnnotationScanner implements AnnotationScanning
 	@NotNull
 	private String packageToDirectory(@NotNull final String pkg)
 	{
+		Objects.requireNonNull(pkg);
+
 		return this.rootDirectory + pkg.replace(".", "/");
 	}
 
@@ -236,7 +244,9 @@ public class AnnotationScanner implements AnnotationScanning
 	@NotNull
 	private String directoryToPackage(@NotNull final String directory)
 	{
-		return directory.replace(rootDirectory, "")
+		Objects.requireNonNull(directory);
+
+		return directory.replace(this.rootDirectory, "")
 						.replace("/", ".");
 	}
 
@@ -249,10 +259,12 @@ public class AnnotationScanner implements AnnotationScanning
 	@NotNull
 	private Boolean isCorrectFile(@NotNull final String directory)
 	{
+		Objects.requireNonNull(directory);
+
 		if (!directory.endsWith(".class"))
 		{
 			LOG.debug(String.format(
-				localeCore.getString("00006"),
+				this.localeCore.getString("00006"),
 				directory
 			));
 
@@ -269,7 +281,7 @@ public class AnnotationScanner implements AnnotationScanning
 			if (directory.endsWith(file))
 			{
 				LOG.debug(String.format(
-					localeCore.getString("00006"),
+					this.localeCore.getString("00006"),
 					directory
 				));
 
