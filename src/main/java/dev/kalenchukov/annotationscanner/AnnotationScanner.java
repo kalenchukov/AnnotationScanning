@@ -64,9 +64,11 @@ public class AnnotationScanner implements AnnotationScanning
 	{
 		Objects.requireNonNull(locale);
 
-		this.locale = locale;
-
-		this.localeCore = ResourceBundle.getBundle("localizations/core", this.locale);
+		if (!this.locale.equals(locale))
+		{
+			this.locale = locale;
+			this.localeCore = ResourceBundle.getBundle("localizations/core", this.locale);
+		}
 	}
 
 	/**
