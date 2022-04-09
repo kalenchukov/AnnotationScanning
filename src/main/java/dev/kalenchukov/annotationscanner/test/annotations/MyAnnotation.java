@@ -4,7 +4,7 @@
  * E-mail: mailto:aleksey.kalenchukov@yandex.ru
  */
 
-package dev.kalenchukov.annotationscanner.tests.annotations;
+package dev.kalenchukov.annotationscanner.test.annotations;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

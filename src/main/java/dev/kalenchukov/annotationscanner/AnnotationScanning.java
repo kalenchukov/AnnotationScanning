@@ -40,5 +40,5 @@ public interface AnnotationScanning
 	 * @return Коллекцию классов которые содержат искомую аннотацию.
 	 */
 	@NotNull
-	List<Class<?>> findAnnotatedClasses(@NotNull Class<? extends Annotation> annotationClass);
+	List<@NotNull Class<?>> findAnnotatedClasses(@NotNull Class<? extends Annotation> annotationClass);
 }

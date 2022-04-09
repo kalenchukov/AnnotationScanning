@@ -4,9 +4,9 @@
  * E-mail: mailto:aleksey.kalenchukov@yandex.ru
  */
 
-package dev.kalenchukov.annotationscanner.tests.packages.musics.rock;
+package dev.kalenchukov.annotationscanner.test.packages.musics.rock;
 
-import dev.kalenchukov.annotationscanner.tests.annotations.MyAnnotation;
+import dev.kalenchukov.annotationscanner.test.annotations.MyAnnotation;
 
 @MyAnnotation
 public class RockMusic

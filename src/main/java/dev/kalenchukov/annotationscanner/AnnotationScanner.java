@@ -19,24 +19,23 @@ import org.apache.log4j.Logger;
 public class AnnotationScanner implements AnnotationScanning
 {
 	/**
+	 * Локаль.
+	 * Для изменения локали необходимо использовать {@link #setLocale(Locale)}.
+	 */
+	@NotNull
+	private Locale locale = new Locale("ru", "RU");
+
+	/**
 	 * Устанавливает логгер для данного класса.
 	 */
 	@NotNull
 	private static final Logger LOG = Logger.getLogger(AnnotationScanner.class);
 
 	/**
-	 * Локаль.
-	 * Для изменения локали необходимо использовать {@link #setLocale(Locale)}.
-	 * Внимание! Необходима для логов, так как локализационные тексты используются только для логирования.
-	 */
-	@NotNull
-	private Locale locale = new Locale("ru", "RU");
-
-	/**
 	 * Устанавливает тексты локализации для логирования.
 	 */
 	@NotNull
-	private ResourceBundle localeCore = ResourceBundle.getBundle("localizations/core", this.locale);
+	private ResourceBundle localeLogs = ResourceBundle.getBundle("localizations/logs", this.locale);
 
 	/**
 	 * Корневая директория для поиска аннотированных классов.
@@ -49,13 +48,13 @@ public class AnnotationScanner implements AnnotationScanning
 	 * Для добавления пакетов необходимо использовать {@link #addPackage(String)}.
 	 */
 	@NotNull
-	private final Set<String> pkgs = new HashSet<>();
+	private final Set<@NotNull String> pkgs = new HashSet<>();
 
 	/**
 	 * Коллекция найденных аннотированных классов.
 	 */
 	@NotNull
-	private final List<Class<?>> annotatedClasses = new ArrayList<>();
+	private final List<@NotNull Class<?>> annotatedClasses = new ArrayList<>();
 
 	/**
 	 * @see AnnotationScanning#setLocale(Locale)
@@ -67,7 +66,8 @@ public class AnnotationScanner implements AnnotationScanning
 		if (!this.locale.equals(locale))
 		{
 			this.locale = locale;
-			this.localeCore = ResourceBundle.getBundle("localizations/core", this.locale);
+
+			this.localeLogs = ResourceBundle.getBundle("localizations/logs", this.locale);
 		}
 	}
 
@@ -81,7 +81,7 @@ public class AnnotationScanner implements AnnotationScanning
 		this.pkgs.add(pkg);
 
 		LOG.debug(String.format(
-			this.localeCore.getString("00001"),
+			this.localeLogs.getString("00001"),
 			pkg
 		));
 	}
@@ -93,19 +93,19 @@ public class AnnotationScanner implements AnnotationScanning
 	{
 		this.pkgs.clear();
 
-		LOG.debug(this.localeCore.getString("00002"));
+		LOG.debug(this.localeLogs.getString("00002"));
 	}
 
 	/**
 	 * @see AnnotationScanning#findAnnotatedClasses(Class)
 	 */
 	@NotNull
-	public List<Class<?>> findAnnotatedClasses(@NotNull final Class<? extends Annotation> annotationClass)
+	public List<@NotNull Class<?>> findAnnotatedClasses(@NotNull final Class<? extends Annotation> annotationClass)
 	{
 		Objects.requireNonNull(annotationClass);
 
 		LOG.debug(String.format(
-			this.localeCore.getString("00008"),
+			this.localeLogs.getString("00008"),
 			this.rootDirectory
 		));
 
@@ -135,7 +135,7 @@ public class AnnotationScanner implements AnnotationScanning
 		Objects.requireNonNull(annotationClass);
 
 		LOG.debug(String.format(
-			this.localeCore.getString("00003"),
+			this.localeLogs.getString("00003"),
 			directory
 		));
 
@@ -152,7 +152,7 @@ public class AnnotationScanner implements AnnotationScanning
 
 				if (!file.canRead()) {
 					LOG.debug(String.format(
-						this.localeCore.getString("00004"),
+						this.localeLogs.getString("00004"),
 						directory
 					));
 					continue;
@@ -184,7 +184,7 @@ public class AnnotationScanner implements AnnotationScanning
 		Objects.requireNonNull(annotationClass);
 
 		LOG.debug(String.format(
-			this.localeCore.getString("00005"),
+			this.localeLogs.getString("00005"),
 			path
 		));
 
@@ -201,7 +201,7 @@ public class AnnotationScanner implements AnnotationScanning
 				annotatedClasses.add(objectClass);
 
 				LOG.debug(String.format(
-					this.localeCore.getString("00007"),
+					this.localeLogs.getString("00007"),
 					path
 				));
 			}
@@ -266,7 +266,7 @@ public class AnnotationScanner implements AnnotationScanning
 		if (!directory.endsWith(".class"))
 		{
 			LOG.debug(String.format(
-				this.localeCore.getString("00006"),
+				this.localeLogs.getString("00006"),
 				directory
 			));
 
@@ -283,7 +283,7 @@ public class AnnotationScanner implements AnnotationScanning
 			if (directory.endsWith(file))
 			{
 				LOG.debug(String.format(
-					this.localeCore.getString("00006"),
+					this.localeLogs.getString("00006"),
 					directory
 				));
 
