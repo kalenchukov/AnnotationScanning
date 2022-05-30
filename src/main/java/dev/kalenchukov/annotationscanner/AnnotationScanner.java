@@ -31,7 +31,7 @@ public class AnnotationScanner implements AnnotationScanning
 	private static final Logger LOG = Logger.getLogger(AnnotationScanner.class);
 
 	/**
-	 * Устанавливает тексты локализации для логирования.
+	 * Локализованные тексты логирования.
 	 */
 	@NotNull
 	private ResourceBundle localeLogs = ResourceBundle.getBundle("localizations/logs", this.locale);
