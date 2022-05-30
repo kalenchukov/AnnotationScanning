@@ -44,7 +44,6 @@ public class AnnotationScanner implements AnnotationScanning
 
 	/**
 	 * Коллекция пакетов в которых необходимо искать аннотированные классы.
-	 * Для добавления пакетов необходимо использовать {@link #addPackage(String)}.
 	 */
 	@NotNull
 	private final Set<@NotNull String> pkgs = new HashSet<>();
