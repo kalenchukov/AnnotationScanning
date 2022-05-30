@@ -19,8 +19,7 @@ import org.apache.log4j.Logger;
 public class AnnotationScanner implements AnnotationScanning
 {
 	/**
-	 * Локаль.
-	 * Для изменения локали необходимо использовать {@link #setLocale(Locale)}.
+	 * Локализация.
 	 */
 	@NotNull
 	private Locale locale = new Locale("ru", "RU");
