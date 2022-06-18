@@ -1,4 +1,4 @@
-# AnnotationScanner
+# AnnotationScanning
 Сканер аннотаций по пакетам
 
 ### Использование

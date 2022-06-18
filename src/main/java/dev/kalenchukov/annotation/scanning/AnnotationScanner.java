@@ -4,7 +4,7 @@
  * E-mail: mailto:aleksey.kalenchukov@yandex.ru
  */
 
-package dev.kalenchukov.annotationscanner;
+package dev.kalenchukov.annotation.scanning;
 
 import org.jetbrains.annotations.NotNull;
 

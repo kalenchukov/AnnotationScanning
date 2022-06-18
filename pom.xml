@@ -11,12 +11,12 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>dev.kalenchukov</groupId>
-	<artifactId>annotation-scanner</artifactId>
-	<version>2.1.0</version>
+	<artifactId>annotation-scanning</artifactId>
+	<version>2.2.0</version>
 
-	<name>AnnotationScanner</name>
+	<name>AnnotationScanning</name>
 	<description>Сканер аннотаций по пакетам</description>
-	<url>https://github.com/kalenchukov/AnnotationScanner</url>
+	<url>https://github.com/kalenchukov/AnnotationScanning</url>
 
 	<licenses>
 		<license>
@@ -35,8 +35,8 @@
 	</developers>
 
 	<properties>
-		<maven.compiler.source>16</maven.compiler.source>
-		<maven.compiler.target>16</maven.compiler.target>
+		<maven.compiler.source>18</maven.compiler.source>
+		<maven.compiler.target>18</maven.compiler.target>
 		<encoding>UTF-8</encoding>
 	</properties>
 

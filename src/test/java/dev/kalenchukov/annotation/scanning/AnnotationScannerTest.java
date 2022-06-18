@@ -4,9 +4,9 @@
  * E-mail: mailto:aleksey.kalenchukov@yandex.ru
  */
 
-package dev.kalenchukov.annotationscanner;
+package dev.kalenchukov.annotation.scanning;
 
-import dev.kalenchukov.annotationscanner.test.annotations.MyAnnotation;
+import dev.kalenchukov.annotation.scanning.test.annotations.MyAnnotation;
 import org.junit.Test;
 
 import java.util.List;
