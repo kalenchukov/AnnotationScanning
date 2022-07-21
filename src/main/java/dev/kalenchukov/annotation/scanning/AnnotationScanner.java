@@ -34,7 +34,10 @@ public class AnnotationScanner implements AnnotationScanning
 	 * Локализованные тексты логирования.
 	 */
 	@NotNull
-	private ResourceBundle localeLogs = ResourceBundle.getBundle("localizations/logs", this.locale);
+	private ResourceBundle localeLogs = ResourceBundle.getBundle(
+		"annotation/scanning/localizations/logs",
+		this.locale
+	);
 
 	/**
 	 * Корневая директория для поиска аннотированных классов.
@@ -65,7 +68,10 @@ public class AnnotationScanner implements AnnotationScanning
 		{
 			this.locale = locale;
 
-			this.localeLogs = ResourceBundle.getBundle("localizations/logs", this.locale);
+			this.localeLogs = ResourceBundle.getBundle(
+				"annotation/scanning/localizations/logs",
+				this.locale
+			);
 		}
 	}
 
