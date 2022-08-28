@@ -6,8 +6,8 @@
 
 ```java
 AnnotationScanning annotationScanner = new AnnotationScanner();
-annotationScanner.addPackage("dev.kalenchukov.annotationscanner.tests.packages.films");
-annotationScanner.addPackage("dev.kalenchukov.annotationscanner.tests.packages.musics");
+annotationScanner.addPackage("dev.kalenchukov.annotation.scanning.tests.packages.films");
+annotationScanner.addPackage("dev.kalenchukov.annotation.scanning.tests.packages.musics");
 List<Class<?>> annotatedClasses = annotationScanner.findAnnotatedClasses(MyAnnotation.class);
 
 for (Class<?> objectClass : annotatedClasses)

@@ -40,7 +40,7 @@ public class AnnotationScannerTest
 	public void findAnnotatedClasses1()
 	{
 		AnnotationScanning annotationScanner = new AnnotationScanner();
-		annotationScanner.addPackage("dev.kalenchukov.annotationscanner.test.packages");
+		annotationScanner.addPackage("dev.kalenchukov.annotation.scanning.test.packages");
 		List<Class<?>> annotatedClasses = annotationScanner.findAnnotatedClasses(MyAnnotation.class);
 
 		assertEquals(4, annotatedClasses.size());
@@ -53,8 +53,8 @@ public class AnnotationScannerTest
 	public void findAnnotatedClasses2()
 	{
 		AnnotationScanning annotationScanner = new AnnotationScanner();
-		annotationScanner.addPackage("dev.kalenchukov.annotationscanner.test.packages.films");
-		annotationScanner.addPackage("dev.kalenchukov.annotationscanner.test.packages.musics");
+		annotationScanner.addPackage("dev.kalenchukov.annotation.scanning.test.packages.films");
+		annotationScanner.addPackage("dev.kalenchukov.annotation.scanning.test.packages.musics");
 		List<Class<?>> annotatedClasses = annotationScanner.findAnnotatedClasses(MyAnnotation.class);
 
 		assertEquals(4, annotatedClasses.size());
