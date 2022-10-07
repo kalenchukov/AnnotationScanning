@@ -1,3 +1,6 @@
+/**
+ * Определяет API для сканирования аннотаций по пакетам.
+ */
 module dev.kalenchukov.annotation.scanning
 {
 	requires org.jetbrains.annotations;
