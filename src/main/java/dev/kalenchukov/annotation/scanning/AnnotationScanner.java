@@ -40,7 +40,31 @@ public class AnnotationScanner implements AnnotationScanning
 	 * Локализация.
 	 */
 	@NotNull
-	private Locale locale = new Locale("ru", "RU");
+	private Locale locale;
+
+	/**
+	 * Корневая директория для поиска аннотированных классов.
+	 */
+	@NotNull
+	private final String rootDirectory;
+
+	/**
+	 * Коллекция пакетов в которых необходимо искать аннотированные классы.
+	 */
+	@NotNull
+	private final Set<@NotNull String> pkgs;
+
+	/**
+	 * Коллекция найденных аннотированных классов.
+	 */
+	@NotNull
+	private final List<@NotNull Class<?>> annotatedClasses;
+
+	/**
+	 * Локализованные тексты логирования.
+	 */
+	@NotNull
+	private ResourceBundle localeLogs;
 
 	/**
 	 * Логгер для данного класса.
@@ -49,31 +73,19 @@ public class AnnotationScanner implements AnnotationScanning
 	private static final Logger LOG = Logger.getLogger(AnnotationScanner.class);
 
 	/**
-	 * Локализованные тексты логирования.
+	 * Конструктор для {@code AnnotationScanner}.
 	 */
-	@NotNull
-	private ResourceBundle localeLogs = ResourceBundle.getBundle(
-		"annotation/scanning/localizations/logs",
-		this.locale
-	);
-
-	/**
-	 * Корневая директория для поиска аннотированных классов.
-	 */
-	@NotNull
-	private final String rootDirectory = this.getRootDirectory();
-
-	/**
-	 * Коллекция пакетов в которых необходимо искать аннотированные классы.
-	 */
-	@NotNull
-	private final Set<@NotNull String> pkgs = new HashSet<>();
-
-	/**
-	 * Коллекция найденных аннотированных классов.
-	 */
-	@NotNull
-	private final List<@NotNull Class<?>> annotatedClasses = new ArrayList<>();
+	public AnnotationScanner()
+	{
+		this.locale = new Locale("ru", "RU");
+		this.rootDirectory = this.getRootDirectory();
+		this.pkgs = new HashSet<>();
+		this.annotatedClasses = new ArrayList<>();
+		this.localeLogs = ResourceBundle.getBundle(
+			"annotation/scanning/localizations/logs",
+			this.locale
+		);
+	}
 
 	/**
 	 * @see AnnotationScanning#setLocale(Locale)
