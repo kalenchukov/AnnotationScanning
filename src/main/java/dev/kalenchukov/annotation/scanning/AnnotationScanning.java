@@ -30,6 +30,9 @@ import java.lang.annotation.Annotation;
 import java.util.List;
 import java.util.Locale;
 
+/**
+ * Интерфейс для реализации классов поиска аннотированных классов.
+ */
 public interface AnnotationScanning
 {
 	/**
