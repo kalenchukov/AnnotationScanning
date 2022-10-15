@@ -30,7 +30,7 @@
 
 	<groupId>dev.kalenchukov</groupId>
 	<artifactId>annotation-scanning</artifactId>
-	<version>2.2.0</version>
+	<version>2.3.0</version>
 
 	<name>AnnotationScanning</name>
 	<description>Сканер аннотаций по пакетам</description>
