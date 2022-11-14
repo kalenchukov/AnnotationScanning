@@ -254,7 +254,10 @@ public class AnnotationScanner implements AnnotationScanning
 	@NotNull
 	private String getRootDirectory()
 	{
-		return System.getProperty("user.dir") + "/target/classes/";
+		return System.getProperty("user.dir") +
+			File.separator + "target" +
+			File.separator + "classes" +
+			File.separator;
 	}
 
 	/**
@@ -268,7 +271,7 @@ public class AnnotationScanner implements AnnotationScanning
 	{
 		Objects.requireNonNull(pkg);
 
-		return this.rootDirectory + pkg.replace(".", "/");
+		return this.rootDirectory + pkg.replace(".", File.separator);
 	}
 
 	/**
@@ -283,7 +286,7 @@ public class AnnotationScanner implements AnnotationScanning
 		Objects.requireNonNull(directory);
 
 		return directory.replace(this.rootDirectory, "")
-						.replace("/", ".");
+						.replace(File.separator, ".");
 	}
 
 	/**
