@@ -22,11 +22,3 @@ RockMusic.class
 Music.class
 */
 ```
-
-## Версии
-
-Доступные [версии](https://github.com/kalenchukov/AnnotationScanning/releases).
-
-## Лицензия
-
-[MIT](https://opensource.org/licenses/MIT)
