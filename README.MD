@@ -35,10 +35,6 @@ git clone https://github.com/kalenchukov/AnnotationScanning.git
 
 Доступные [версии](https://github.com/kalenchukov/AnnotationScanning/releases).
 
-## Авторы
-
-[Алексей Каленчуков](https://github.com/kalenchukov)
-
 ## Лицензия
 
 [MIT](https://opensource.org/licenses/MIT)
