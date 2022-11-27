@@ -82,7 +82,7 @@ public class AnnotationScanner implements AnnotationScanning
 		this.pkgs = new HashSet<>();
 		this.annotatedClasses = new ArrayList<>();
 		this.localeLogs = ResourceBundle.getBundle(
-			"annotation/scanning/localizations/logs",
+			"/annotation/scanning/localizations/logs",
 			this.locale
 		);
 	}
@@ -99,7 +99,7 @@ public class AnnotationScanner implements AnnotationScanning
 			this.locale = locale;
 
 			this.localeLogs = ResourceBundle.getBundle(
-				"annotation/scanning/localizations/logs",
+				"/annotation/scanning/localizations/logs",
 				this.locale
 			);
 		}
