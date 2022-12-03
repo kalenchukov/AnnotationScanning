@@ -82,7 +82,7 @@ public class AnnotationScanner implements AnnotationScanning
 		this.pkgs = new HashSet<>();
 		this.annotatedClasses = new ArrayList<>();
 		this.localeLogs = ResourceBundle.getBundle(
-			"/annotation/scanning/localizations/logs",
+			"annotation/scanning/localizations/logs",
 			this.locale
 		);
 	}
@@ -99,7 +99,7 @@ public class AnnotationScanner implements AnnotationScanning
 			this.locale = locale;
 
 			this.localeLogs = ResourceBundle.getBundle(
-				"/annotation/scanning/localizations/logs",
+				"annotation/scanning/localizations/logs",
 				this.locale
 			);
 		}
@@ -160,8 +160,8 @@ public class AnnotationScanner implements AnnotationScanning
 	/**
 	 * Сканирует директорию на наличие файлов.
 	 *
-	 * @param directory Директория.
-	 * @param annotationClass Аннотация которую необходимо искать в классах.
+	 * @param directory директория.
+	 * @param annotationClass аннотация которую необходимо искать в классах.
 	 */
 	private void scanDirectory(@NotNull String directory, @NotNull final Class<? extends Annotation> annotationClass)
 	{
@@ -209,8 +209,8 @@ public class AnnotationScanner implements AnnotationScanning
 	/**
 	 * Проверяет файл на наличие необходимой аннотации.
 	 *
-	 * @param path Путь до файла.
-	 * @param annotationClass Аннотация которую необходимо искать в классах.
+	 * @param path путь до файла.
+	 * @param annotationClass аннотация которую необходимо искать в классах.
 	 */
 	private void checkFile(@NotNull final String path, @NotNull final Class<? extends Annotation> annotationClass)
 	{
@@ -249,7 +249,7 @@ public class AnnotationScanner implements AnnotationScanning
 	/**
 	 * Возвращает корневую директорию.
 	 *
-	 * @return Корневая директория.
+	 * @return корневая директория.
 	 */
 	@NotNull
 	private String getRootDirectory()
@@ -263,8 +263,8 @@ public class AnnotationScanner implements AnnotationScanning
 	/**
 	 * Преобразовывает пакет в директорию.
 	 *
-	 * @param pkg Пакет.
-	 * @return Директория.
+	 * @param pkg пакет.
+	 * @return директория.
 	 */
 	@NotNull
 	private String packageToDirectory(@NotNull final String pkg)
@@ -277,8 +277,8 @@ public class AnnotationScanner implements AnnotationScanning
 	/**
 	 * Преобразовывает директорию в пакет.
 	 *
-	 * @param directory Директория.
-	 * @return Пакет.
+	 * @param directory директория.
+	 * @return пакет.
 	 */
 	@NotNull
 	private String directoryToPackage(@NotNull final String directory)
@@ -292,8 +292,8 @@ public class AnnotationScanner implements AnnotationScanning
 	/**
 	 * Проверяет корректность файла.
 	 *
-	 * @param directory Директория до файла.
-	 * @return Возвращает true, если в файле может присутствовать нужная аннотация, иначе false.
+	 * @param directory директория до файла.
+	 * @return возвращает true, если в файле может присутствовать нужная аннотация, иначе false.
 	 */
 	@NotNull
 	private Boolean isCorrectFile(@NotNull final String directory)

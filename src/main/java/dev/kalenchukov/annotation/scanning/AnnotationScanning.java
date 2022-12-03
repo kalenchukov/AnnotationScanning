@@ -38,14 +38,14 @@ public interface AnnotationScanning
 	/**
 	 * Устанавливает локализацию.
 	 *
-	 * @param locale Локализация.
+	 * @param locale локализация.
 	 */
 	void setLocale(@NotNull Locale locale);
 
 	/**
 	 * Добавляет пакет в котором необходимо искать аннотированные классы.
 	 *
-	 * @param pkg Пакет.
+	 * @param pkg пакет.
 	 */
 	void addPackage(@NotNull String pkg);
 
@@ -57,8 +57,8 @@ public interface AnnotationScanning
 	/**
 	 * Выполняет поиск классов которые содержат указанную аннотацию.
 	 *
-	 * @param annotationClass Аннотация которую необходимо искать в классах.
-	 * @return Коллекцию классов которые содержат искомую аннотацию.
+	 * @param annotationClass аннотация которую необходимо искать в классах.
+	 * @return коллекцию классов которые содержат искомую аннотацию.
 	 */
 	@NotNull
 	List<@NotNull Class<?>> findAnnotatedClasses(@NotNull Class<? extends Annotation> annotationClass);
