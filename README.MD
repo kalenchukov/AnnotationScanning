@@ -12,11 +12,12 @@ for (Class<?> objectClass : annotatedClasses)
 {
     System.out.println(objectClass.getName() + ".class");
 }
-/*
+```
+
 Результат выполнения:
+```
 Film.class
 Video.class
 RockMusic.class
 Music.class
-*/
 ```
