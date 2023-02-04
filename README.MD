@@ -1,9 +1,7 @@
 # AnnotationScanning
-
 Сканер аннотаций по пакетам
 
 ## Использование
-
 ```java
 AnnotationScanning annotationScanner = new AnnotationScanner();
 annotationScanner.addPackage("dev.kalenchukov.annotation.scanning.tests.packages.films");
