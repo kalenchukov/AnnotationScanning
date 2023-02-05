@@ -1,4 +1,5 @@
-# AnnotationScanning
+# Справка
+## AnnotationScanning
 Сканер аннотаций по пакетам
 
 ## Использование
