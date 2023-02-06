@@ -31,13 +31,16 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Класс проверки методов класса {@link AnnotationScanner}.
+ */
 public class AnnotationScannerTest
 {
 	/**
-	 * Проверка поиска по одному пакету.
+	 * Проверка метода {@link AnnotationScanner#findAnnotatedClasses(Class)}.
 	 */
 	@Test
-	public void findAnnotatedClasses1()
+	public void testFindAnnotatedClasses()
 	{
 		AnnotationScanning annotationScanner = new AnnotationScanner();
 		annotationScanner.addPackage("dev.kalenchukov.annotation.scanning.test.packages");
@@ -47,10 +50,10 @@ public class AnnotationScannerTest
 	}
 
 	/**
-	 * Проверка поиска по двум пакетам.
+	 * Проверка метода {@link AnnotationScanner#findAnnotatedClasses(Class)} по нескольким пакетам.
 	 */
 	@Test
-	public void findAnnotatedClasses2()
+	public void testFindAnnotatedClassesManyPackage()
 	{
 		AnnotationScanning annotationScanner = new AnnotationScanner();
 		annotationScanner.addPackage("dev.kalenchukov.annotation.scanning.test.packages.films");
@@ -61,10 +64,10 @@ public class AnnotationScannerTest
 	}
 
 	/**
-	 * Проверка поиска без указания пакетов.
+	 * Проверка метода {@link AnnotationScanner#findAnnotatedClasses(Class)} без пакетов.
 	 */
 	@Test
-	public void findAnnotatedClasses3()
+	public void testFindAnnotatedClassesNotPackage()
 	{
 		AnnotationScanning annotationScanner = new AnnotationScanner();
 		List<Class<?>> annotatedClasses = annotationScanner.findAnnotatedClasses(MyAnnotation.class);
