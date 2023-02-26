@@ -88,8 +88,11 @@ public class AnnotationScanner implements AnnotationScanning
 	}
 
 	/**
-	 * @see AnnotationScanning#setLocale(Locale)
+	 * {@inheritDoc}
+	 *
+	 * @param locale {@inheritDoc}
 	 */
+	@Override
 	public void setLocale(@NotNull final Locale locale)
 	{
 		Objects.requireNonNull(locale);
@@ -106,8 +109,11 @@ public class AnnotationScanner implements AnnotationScanning
 	}
 
 	/**
-	 * @see AnnotationScanning#addPackage(String)
+	 * {@inheritDoc}
+	 *
+	 * @param pkg {@inheritDoc}
 	 */
+	@Override
 	public void addPackage(@NotNull final String pkg)
 	{
 		Objects.requireNonNull(pkg);
@@ -121,8 +127,9 @@ public class AnnotationScanner implements AnnotationScanning
 	}
 
 	/**
-	 * @see AnnotationScanning#removePackages()
+	 * {@inheritDoc}
 	 */
+	@Override
 	public void removePackages()
 	{
 		this.pkgs.clear();
@@ -131,9 +138,13 @@ public class AnnotationScanner implements AnnotationScanning
 	}
 
 	/**
-	 * @see AnnotationScanning#findAnnotatedClasses(Class)
+	 * {@inheritDoc}
+	 *
+	 * @param annotationClass {@inheritDoc}
+	 * @return {@inheritDoc}
 	 */
 	@NotNull
+	@Override
 	public List<@NotNull Class<?>> findAnnotatedClasses(@NotNull final Class<? extends Annotation> annotationClass)
 	{
 		Objects.requireNonNull(annotationClass);
