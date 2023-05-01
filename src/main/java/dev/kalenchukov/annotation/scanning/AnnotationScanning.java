@@ -32,6 +32,8 @@ import java.util.Locale;
 
 /**
  * Интерфейс для реализации классов поиска аннотированных классов.
+ *
+ * @author Aleksey Kalenchukov
  */
 public interface AnnotationScanning
 {
