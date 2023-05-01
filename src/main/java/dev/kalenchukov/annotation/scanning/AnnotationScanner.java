@@ -33,6 +33,8 @@ import org.apache.log4j.Logger;
 
 /**
  * Класс для поиска аннотированных классов.
+ *
+ * @author Aleksey Kalenchukov
  */
 public class AnnotationScanner implements AnnotationScanning
 {
