@@ -29,7 +29,8 @@ import org.jetbrains.annotations.NotNull;
 import java.io.*;
 import java.lang.annotation.Annotation;
 import java.util.*;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * Класс для поиска аннотированных классов.
@@ -72,7 +73,7 @@ public class AnnotationScanner implements AnnotationScanning
 	 * Логгер для данного класса.
 	 */
 	@NotNull
-	private static final Logger LOG = Logger.getLogger(AnnotationScanner.class);
+	private static final Logger LOG = LogManager.getLogger(AnnotationScanner.class);
 
 	/**
 	 * Конструктор для {@code AnnotationScanner}.

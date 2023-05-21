@@ -4,7 +4,7 @@
 module dev.kalenchukov.annotation.scanning
 {
 	requires org.jetbrains.annotations;
-	requires log4j;
+	requires org.apache.logging.log4j;
 
 	exports dev.kalenchukov.annotation.scanning;
 }
