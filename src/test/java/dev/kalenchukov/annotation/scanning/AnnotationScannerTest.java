@@ -42,7 +42,7 @@ public class AnnotationScannerTest
 	 * Проверка метода {@link AnnotationScanner#findAnnotatedClasses(Class)}.
 	 */
 	@Test
-	public void testFindAnnotatedClasses()
+	public void findAnnotatedClasses()
 	{
 		AnnotationScanning annotationScanner = new AnnotationScanner();
 		annotationScanner.addPackage("dev.kalenchukov.annotation.scanning.test.packages");
@@ -55,7 +55,7 @@ public class AnnotationScannerTest
 	 * Проверка метода {@link AnnotationScanner#findAnnotatedClasses(Class)} по нескольким пакетам.
 	 */
 	@Test
-	public void testFindAnnotatedClassesManyPackage()
+	public void findAnnotatedClassesManyPackage()
 	{
 		AnnotationScanning annotationScanner = new AnnotationScanner();
 		annotationScanner.addPackage("dev.kalenchukov.annotation.scanning.test.packages.films");
@@ -69,7 +69,7 @@ public class AnnotationScannerTest
 	 * Проверка метода {@link AnnotationScanner#findAnnotatedClasses(Class)} без пакетов.
 	 */
 	@Test
-	public void testFindAnnotatedClassesNotPackage()
+	public void findAnnotatedClassesNotPackage()
 	{
 		AnnotationScanning annotationScanner = new AnnotationScanner();
 		List<Class<?>> annotatedClasses = annotationScanner.findAnnotatedClasses(MyAnnotation.class);
