@@ -48,7 +48,9 @@ public class AnnotationScannerTest
 		annotationScanner.addPackage("dev.kalenchukov.annotation.scanning.test.packages");
 		List<Class<?>> annotatedClasses = annotationScanner.findAnnotatedClasses(MyAnnotation.class);
 
-		assertEquals(4, annotatedClasses.size());
+		Integer actual = annotatedClasses.size();
+
+		assertEquals(4, actual);
 	}
 
 	/**
@@ -62,7 +64,9 @@ public class AnnotationScannerTest
 		annotationScanner.addPackage("dev.kalenchukov.annotation.scanning.test.packages.musics");
 		List<Class<?>> annotatedClasses = annotationScanner.findAnnotatedClasses(MyAnnotation.class);
 
-		assertEquals(4, annotatedClasses.size());
+		Integer actual = annotatedClasses.size();
+
+		assertEquals(4, actual);
 	}
 
 	/**
@@ -74,6 +78,8 @@ public class AnnotationScannerTest
 		AnnotationScanning annotationScanner = new AnnotationScanner();
 		List<Class<?>> annotatedClasses = annotationScanner.findAnnotatedClasses(MyAnnotation.class);
 
-		assertEquals(4, annotatedClasses.size());
+		Integer actual = annotatedClasses.size();
+
+		assertEquals(4, actual);
 	}
 }
