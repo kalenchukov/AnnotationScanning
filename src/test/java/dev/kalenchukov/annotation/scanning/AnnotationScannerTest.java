@@ -29,7 +29,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Класс проверки методов класса {@link AnnotationScanner}.
@@ -48,9 +48,9 @@ public class AnnotationScannerTest
 		annotationScanner.addPackage("dev.kalenchukov.annotation.scanning.test.packages");
 		List<Class<?>> annotatedClasses = annotationScanner.findAnnotatedClasses(MyAnnotation.class);
 
-		Integer actualSize = annotatedClasses.size();
+		int actualSize = annotatedClasses.size();
 
-		assertEquals(4, actualSize);
+		assertThat(actualSize).isEqualTo(4);
 	}
 
 	/**
@@ -64,9 +64,9 @@ public class AnnotationScannerTest
 		annotationScanner.addPackage("dev.kalenchukov.annotation.scanning.test.packages.musics");
 		List<Class<?>> annotatedClasses = annotationScanner.findAnnotatedClasses(MyAnnotation.class);
 
-		Integer actualSize = annotatedClasses.size();
+		int actualSize = annotatedClasses.size();
 
-		assertEquals(4, actualSize);
+		assertThat(actualSize).isEqualTo(4);
 	}
 
 	/**
@@ -78,8 +78,8 @@ public class AnnotationScannerTest
 		AnnotationScanning annotationScanner = new AnnotationScanner();
 		List<Class<?>> annotatedClasses = annotationScanner.findAnnotatedClasses(MyAnnotation.class);
 
-		Integer actualSize = annotatedClasses.size();
+		int actualSize = annotatedClasses.size();
 
-		assertEquals(4, actualSize);
+		assertThat(actualSize).isEqualTo(4);
 	}
 }
