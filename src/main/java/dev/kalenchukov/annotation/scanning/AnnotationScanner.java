@@ -309,8 +309,7 @@ public class AnnotationScanner implements AnnotationScanning
 	 * @param directory директория до файла.
 	 * @return возвращает true, если в файле может присутствовать нужная аннотация, иначе false.
 	 */
-	@NotNull
-	private Boolean isCorrectFile(@NotNull final String directory)
+	private boolean isCorrectFile(@NotNull final String directory)
 	{
 		Objects.requireNonNull(directory);
 
