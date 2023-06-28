@@ -94,6 +94,7 @@ public class AnnotationScanner implements AnnotationScanning
 	 * {@inheritDoc}
 	 *
 	 * @param locale {@inheritDoc}
+	 * @throws NullPointerException если в качестве {@code locale} передан {@code null}.
 	 */
 	@Override
 	public void setLocale(@NotNull final Locale locale)
@@ -115,6 +116,7 @@ public class AnnotationScanner implements AnnotationScanning
 	 * {@inheritDoc}
 	 *
 	 * @param pkg {@inheritDoc}
+	 * @throws NullPointerException если в качестве {@code pkg} передан {@code null}.
 	 */
 	@Override
 	public void addPackage(@NotNull final String pkg)
@@ -145,6 +147,7 @@ public class AnnotationScanner implements AnnotationScanning
 	 *
 	 * @param annotationClass {@inheritDoc}
 	 * @return {@inheritDoc}
+	 * @throws NullPointerException если в качестве {@code annotationClass} передан {@code null}.
 	 */
 	@NotNull
 	@Override
@@ -176,6 +179,8 @@ public class AnnotationScanner implements AnnotationScanning
 	 *
 	 * @param directory директория.
 	 * @param annotationClass аннотация которую необходимо искать в классах.
+	 * @throws NullPointerException если в качестве {@code directory} передан {@code null}.
+	 * @throws NullPointerException если в качестве {@code annotationClass} передан {@code null}.
 	 */
 	private void scanDirectory(@NotNull String directory, @NotNull final Class<? extends Annotation> annotationClass)
 	{
@@ -225,6 +230,8 @@ public class AnnotationScanner implements AnnotationScanning
 	 *
 	 * @param path путь до файла.
 	 * @param annotationClass аннотация которую необходимо искать в классах.
+	 * @throws NullPointerException если в качестве {@code path} передан {@code null}.
+	 * @throws NullPointerException если в качестве {@code annotationClass} передан {@code null}.
 	 */
 	private void checkFile(@NotNull final String path, @NotNull final Class<? extends Annotation> annotationClass)
 	{
@@ -279,6 +286,7 @@ public class AnnotationScanner implements AnnotationScanning
 	 *
 	 * @param pkg пакет.
 	 * @return директория.
+	 * @throws NullPointerException если в качестве {@code pkg} передан {@code null}.
 	 */
 	@NotNull
 	private String packageToDirectory(@NotNull final String pkg)
@@ -293,6 +301,7 @@ public class AnnotationScanner implements AnnotationScanning
 	 *
 	 * @param directory директория.
 	 * @return пакет.
+	 * @throws NullPointerException если в качестве {@code directory} передан {@code null}.
 	 */
 	@NotNull
 	private String directoryToPackage(@NotNull final String directory)
@@ -308,6 +317,7 @@ public class AnnotationScanner implements AnnotationScanning
 	 *
 	 * @param directory директория до файла.
 	 * @return возвращает true, если в файле может присутствовать нужная аннотация, иначе false.
+	 * @throws NullPointerException если в качестве {@code directory} передан {@code null}.
 	 */
 	private boolean isCorrectFile(@NotNull final String directory)
 	{
