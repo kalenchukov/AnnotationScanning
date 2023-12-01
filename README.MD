@@ -11,7 +11,7 @@ List<Class<?>> annotatedClasses = annotationScanner.findAnnotatedClasses(MyAnnot
 
 for (Class<?> objectClass : annotatedClasses)
 {
-    System.out.println(objectClass.getName() + ".class");
+	System.out.println(objectClass.getName() + ".class");
 }
 ```
 
